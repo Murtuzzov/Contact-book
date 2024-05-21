@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.1/axios.min.js"
+      integrity="sha512-w9PRLSWbo+Yqin/AzSMGoP+qe8UF1njFtd1rEnR58Xv2GEJNEa6O6Bv53mkPbNyAwGCn1HVt1OOvd5i+E55t+w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <form class="contact-form" action="">
+      <input class="name input" type="text" placeholder="Имя" required />
+      <input
+        class="number input"
+        type="text"
+        placeholder="Номер телефона"
+        required
+      />
+      <input
+        class="email input"
+        type="text"
+        placeholder="Электронная почта"
+        required
+      />
+      <button class="btn-create">Добавить контакт</button>
+      <button class="btn-show-contacts">Показать контакты</button>
+    </form>
+    <div class="scrollable-container">
+      <ul class="list"></ul>
+    </div>
+
+    <script src="./src/js/index.js"></script>
+  </body>
+</html>
