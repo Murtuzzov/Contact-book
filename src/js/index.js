@@ -20,7 +20,7 @@ const createUser = async (newContact) => {
   }
 };
 
-contactForm.addEventListener("submit", (e) => {
+contactForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const newContact = {
@@ -29,11 +29,13 @@ contactForm.addEventListener("submit", (e) => {
     email: inputEmail.value,
   };
 
-  createUser(newContact);
+  await createUser(newContact);
 
   inputName.value = "";
   inputNumber.value = "";
   inputEmail.value = "";
+
+  getUsers(); // После создания нового контакта обновляем список контактов
 });
 
 const getUsers = async () => {
@@ -47,19 +49,38 @@ const getUsers = async () => {
       const li = document.createElement("li");
       li.classList.add("list-item");
       li.innerHTML = ` 
-      <div>
-      <h3 class="list-item__name">${element.name}</h3>
-      <p class="list-item__phone">${element.phone}</p>
-      <p class="list-item__email">${element.email}</p>
-      </div>
-      <button class="btn-delete">Удалить</button>
+        <div>
+          <h3 class="list-item__name">${element.name}</h3>
+          <p class="list-item__phone">${element.phone}</p>
+          <p class="list-item__email">${element.email}</p>
+        </div>
+        <button class="btn-delete" data-id="${element.id}">Удалить</button>
       `;
 
       list.appendChild(li);
     });
-  } catch (error) {}
+
+    document.querySelectorAll(".btn-delete").forEach((button) => {
+      button.addEventListener("click", async (e) => {
+        const id = e.target.getAttribute("data-id");
+        await deleteUser(id);
+        getUsers(); //
+      });
+    });
+  } catch (error) {
+    console.error("Error fetching contacts:", error);
+  }
 };
 
 showContacts.addEventListener("click", () => {
   getUsers();
 });
+
+const deleteUser = async (id) => {
+  try {
+    await axios.delete(`${baseUrl}/${id}`);
+    console.log(`Contact with id ${id} deleted`);
+  } catch (error) {
+    console.error("Error deleting contact:", error);
+  }
+};
