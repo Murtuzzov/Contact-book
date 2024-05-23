@@ -68,7 +68,7 @@ const getUsers = async () => {
       });
     });
   } catch (error) {
-    console.error("Error fetching contacts:", error);
+    console.error("error", error);
   }
 };
 
@@ -79,8 +79,8 @@ showContacts.addEventListener("click", () => {
 const deleteUser = async (id) => {
   try {
     await axios.delete(`${baseUrl}/${id}`);
-    console.log(`Contact with id ${id} deleted`);
+    console.log(`Контакт удалён`);
   } catch (error) {
-    console.error("Error deleting contact:", error);
+    console.error("error", error);
   }
 };
