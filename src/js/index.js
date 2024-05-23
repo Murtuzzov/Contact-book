@@ -35,7 +35,7 @@ contactForm.addEventListener("submit", async (e) => {
   inputNumber.value = "";
   inputEmail.value = "";
 
-  getUsers(); // После создания нового контакта обновляем список контактов
+  getUsers(); 
 });
 
 const getUsers = async () => {
